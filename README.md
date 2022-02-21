@@ -1,0 +1,5 @@
+# Soninis-Slankiklis
+Programo Sistemu Inžinerijos projektas
+
+
+Mūsų komanda, pavadinimu Copium, nusprendė Programų sistemų inžinerijos moduliui suprojektuoti ir suprogramuoti dviejų dimensijų video-žaidimą. Projektui pasirinkome platformer žanrą, nes visi projekto komandos nariai yra tokio žanro žaidimų fanai. Žaidimui taip pat imame įkvėpimą iš "roguelike" žanro, kuris remiasi ant atsitiktinai sugeneruotų lygių. Pastarasis pasirinkimas reiškia, jog mums nereikės atskirai projektuoti kiekvieno lygio, bet teks sukurti generatorių, kuris sugebėtų generuoti sudėtingus, bet įveikiamus lygius. Žaidimui sudėtingumą suteikia ne tik platformų išsidėstymas, bet ir paprastą dirbtinį intelektą demonstruojantys priešininkai, kurie taip pat atsitiktinai sugeneruoti. Žaidėjas pradės su limituotu sugebėjimų pasirinkimu, kiti gebėjimai bus pasiekti sėkmingai pereinant lygius. Jeigu mūsų komandai pavyks įgyvendinti šiuos tikslus, planuojame implementuoti atskiras veikėjų klases  ir veikėjo išvaizdos personalizaciją.

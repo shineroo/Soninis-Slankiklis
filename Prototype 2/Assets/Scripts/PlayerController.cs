@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 10.0f;
-    public float horizontalInput;
-    public float xRange = 10.0f;
+    public Rigidbody rb;
 
-    public GameObject projectilePrefab;
-    
+    public Camera cam;
+    Vector3 movement;
+    Ray cameraRay;
+
+    public GunController gun;
 
     // Start is called before the first frame update
     void Start()
@@ -20,23 +22,37 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < -xRange)
+        // walking inputs
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.z = Input.GetAxisRaw("Vertical");
+
+        // mouse position
+        cameraRay = cam.ScreenPointToRay(Input.mousePosition);
+
+        // shoot
+        if (Input.GetMouseButtonDown(0))
+            gun.isFiring = true;
+        if (Input.GetMouseButtonUp(0))
+            gun.isFiring = false;
+    }
+
+    private void FixedUpdate()
+    {
+        // walk
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayLength;
+
+        // look
+        if (groundPlane.Raycast(cameraRay, out rayLength))
         {
-            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);  
+            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+            Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
+
+            transform.LookAt(pointToLook);
         }
 
-        if (transform.position.x > xRange)
-        {
-            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);  
-        }
-
-        horizontalInput = Input.GetAxis("Horizontal");
-
-        transform.Translate(Vector3.right*Time.deltaTime*speed*horizontalInput);
         
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
-        }
     }
 }
